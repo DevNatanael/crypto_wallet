@@ -1,8 +1,7 @@
-<%= form_with(model: coin) do |form| %>
+<%= form_with(model: coin, class: "coin-form") do |form| %>
   <% if coin.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(coin.errors.count, "error") %> prohibited this coin from being saved:</h2>
-
+    <div class="error-messages">
+      <h3><%= pluralize(coin.errors.count, "erro") %> impediram esta moeda de ser salva:</h3>
       <ul>
         <% coin.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,22 +10,154 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+  <div class="form-group">
+    <%= form.label :description, "Descrição da Moeda", class: "form-label" %>
+    <%= form.text_field :description, class: "form-input", placeholder: "Ex: Bitcoin, Ethereum, Cardano..." %>
   </div>
 
-  <div>
-    <%= form.label :acronym, style: "display: block" %>
-    <%= form.text_field :acronym %>
+  <div class="form-group">
+    <%= form.label :acronym, "Sigla", class: "form-label" %>
+    <%= form.text_field :acronym, class: "form-input", placeholder: "Ex: BTC, ETH, ADA..." %>
   </div>
 
-  <div>
-    <%= form.label :url_image, style: "display: block" %>
-    <%= form.text_field :url_image %>
+  <div class="form-group">
+    <%= form.label :url_image, "URL da Imagem", class: "form-label" %>
+    <%= form.text_field :url_image, class: "form-input", placeholder: "https://exemplo.com/imagem.png" %>
+    <small class="form-help">Cole aqui o link da imagem da moeda</small>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= form.submit coin.new_record? ? "Criar Moeda" : "Atualizar Moeda", class: "btn btn-primary" %>
+    <%= link_to "Cancelar", coins_path, class: "btn btn-secondary" %>
   </div>
 <% end %>
+
+<style>
+.coin-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.error-messages {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  border: 1px solid #f5c6cb;
+}
+
+.error-messages h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.1em;
+}
+
+.error-messages ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.error-messages li {
+  margin-bottom: 5px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 1em;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-input::placeholder {
+  color: #6c757d;
+  opacity: 0.7;
+}
+
+.form-help {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.875em;
+  color: #6c757d;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  min-width: 120px;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+  color: white;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #545b62;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .coin-form {
+    padding: 20px;
+    margin: 0 10px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+</style>

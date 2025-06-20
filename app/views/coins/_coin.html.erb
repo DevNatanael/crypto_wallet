@@ -1,17 +1,73 @@
 <div id="<%= dom_id coin %>">
-  <p>
-    <strong>Description:</strong>
-    <%= coin.description %>
-  </p>
-
-  <p>
-    <strong>Acronym:</strong>
-    <%= coin.acronym %>
-  </p>
-
-  <p>
-    <strong>Url image:</strong>
-    <%= coin.url_image %>
-  </p>
-
+  <div class="coin-header">
+    <div class="coin-info">
+      <% if coin.url_image.present? %>
+        <%= image_tag coin.url_image, alt: coin.description, class: "coin-image" %>
+      <% else %>
+        <div class="coin-placeholder">
+          <span>?</span>
+        </div>
+      <% end %>
+      <div class="coin-details">
+        <div class="coin-name"><%= coin.description %></div>
+        <div class="coin-acronym"><%= coin.acronym %></div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<style>
+  .coin-header {
+    margin-bottom: 15px;
+  }
+
+  .coin-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .coin-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #dee2e6;
+    flex-shrink: 0;
+  }
+
+  .coin-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #e9ecef;
+    border: 2px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .coin-placeholder span {
+    color: #6c757d;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  .coin-details {
+    flex: 1;
+  }
+
+  .coin-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+
+  .coin-acronym {
+    color: #666;
+    font-size: 1em;
+    font-weight: 500;
+  }
+</style>
