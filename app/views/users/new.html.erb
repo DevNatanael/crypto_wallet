@@ -1,0 +1,103 @@
+<% content_for :title, "Criar Conta" %>
+
+<div class="register-container">
+  <div class="register-card">
+    <div class="page-header">
+      <h1>Criar Conta</h1>
+      <p>Preencha os dados abaixo para criar sua conta</p>
+    </div>
+
+    <%= render "form", user: @user %>
+
+    <div class="register-footer">
+      <p>Já tem uma conta? <%= link_to "Fazer Login", login_path, class: "link" %></p>
+    </div>
+  </div>
+</div>
+
+<style>
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.register-card {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 700px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  color: #333;
+  margin: 0 0 10px 0;
+  font-size: 2.2em;
+  font-weight: 600;
+}
+
+.page-header p {
+  color: #666;
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.register-footer {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.register-footer p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 1em;
+}
+
+.link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: #5a6fd8;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .register-card {
+    padding: 30px 20px;
+  }
+
+  .page-header h1 {
+    font-size: 1.8em;
+  }
+
+  .page-header p {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-container {
+    padding: 10px;
+  }
+
+  .register-card {
+    padding: 25px 15px;
+  }
+}
+</style>

@@ -23,6 +23,48 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%# Verificar se não estamos nas páginas de login ou registro %>
+    <% unless controller_name == 'sessions' && action_name == 'login' ||
+              controller_name == 'users' && action_name == 'new' %>
+      <!-- Barra de Navegação -->
+      <nav class="navbar">
+        <div class="navbar-container">
+          <div class="navbar-brand">
+            <%= link_to "Crypto Wallet", root_path, class: "navbar-logo" %>
+          </div>
+
+          <div class="navbar-menu">
+            <% if session[:user_id] %>
+              <div class="navbar-user">
+                <span class="user-welcome">Bem-vindo!</span>
+                <%= link_to "Sair", login_path, method: :delete, class: "btn btn-sm btn-outline" %>
+              </div>
+            <% else %>
+              <div class="navbar-auth">
+                <%= link_to "Login", login_path, class: "btn btn-sm btn-primary" %>
+                <%= link_to "Registrar", register_path, class: "btn btn-sm btn-secondary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    <% end %>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+      <% if notice %>
+        <div class="flash-message flash-notice">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="flash-message flash-alert">
+          <%= alert %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </main>
   </body>
 </html>
